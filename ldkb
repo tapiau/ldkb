@@ -1,0 +1,25 @@
+#!/bin/bash
+
+apt-get -y install mc mtr-tiny iptraf iftop strace kernel-package fakeroot build-essential ncurses-bin ncurses-dev bzip2 screen sudo
+
+cd /usr/src
+FILE=`wget -O- -o /dev/null http://kernel.org/ | grep -A 14 '<table id="latest">' | grep '<a href' | grep -v '<img' | cut -d\" -f 2 | cut -c2-`;
+URL="http://kernel.org${FILE}"
+wget -c $URL
+FILE=`basename $FILE`
+DIR=`basename $FILE .tar.xz`
+REVISION=`echo $DIR | cut -d- -f2`
+CORES=`cat /proc/cpuinfo | grep processor | wc -l`
+
+echo -n "Decompressing..."
+tar xJf $FILE
+echo "done."
+cd $DIR
+
+cat /boot/config-`uname -r`>.config
+yes "" | make oldconfig
+make-kpkg clean
+
+#export DISTCC_HOSTS='127.0.0.1 10.10.5.119 10.10.5.63'
+#export CC=distcc
+time fakeroot make-kpkg -j${CORES} --initrd kernel_image kernel_headers

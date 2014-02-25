@@ -22,7 +22,7 @@ make-kpkg clean
 
 #export DISTCC_HOSTS='127.0.0.1 10.10.5.119 10.10.5.63'
 #export CC=distcc
-time fakeroot make-kpkg -j${CORES} --initrd kernel_image kernel_headers
+time fakeroot make-kpkg -j${CORES} --revision 00.01.LDKB --initrd kernel_image kernel_headers
 
 cd /usr/src
 git clone https://github.com/zfsonlinux/spl.git

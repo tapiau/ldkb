@@ -1,0 +1,11 @@
+#!/bin/bash
+
+CORES=`cat /proc/cpuinfo | grep processor | wc -l`
+
+cd /usr/src
+git clone https://github.com/zfsonlinux/spl.git
+cd spl
+./autogen.sh
+./configure
+make -j${CORES} deb-utils deb-kmod
+dpkg -i *.deb

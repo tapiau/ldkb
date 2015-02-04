@@ -7,5 +7,7 @@ git clone https://github.com/zfsonlinux/spl.git
 cd spl
 ./autogen.sh
 ./configure
-make -j${CORES} deb-utils deb-kmod
+#make 
+make -j${CORES} deb
+#make -j${CORES} deb-utils deb-kmod
 dpkg -i *.deb

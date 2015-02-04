@@ -7,5 +7,5 @@ cd /usr/src
 git clone https://github.com/zfsonlinux/zfs.git
 cd zfs
 ./autogen.sh
-./configure --with-spl=/usr/src/spl --with-spl-obj=/usr/src/spl-0.6.3/3.18.3
+./configure --with-spl=/usr/src/spl --with-spl-obj=/usr/src/spl-0.6.3/3.18.5
 make -j${CORES} deb-utils deb-kmod

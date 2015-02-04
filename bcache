@@ -1,0 +1,12 @@
+#!/bin/bash
+
+CORES=`cat /proc/cpuinfo | grep processor | wc -l`
+
+apt-get install pkg-config
+
+cd /usr/src
+git clone https://github.com/g2p/bcache-tools.git
+cd bcache-tools
+make 
+make install
+

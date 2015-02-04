@@ -18,6 +18,7 @@ cd $DIR
 
 cat /boot/config-`uname -r`>.config
 yes "" | make oldconfig
+make menuconfig
 make-kpkg clean
 
 time fakeroot make-kpkg -j${CORES} --revision 00.01.LDKB --initrd kernel_image kernel_headers

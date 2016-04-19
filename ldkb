@@ -3,10 +3,9 @@
 apt-get -y install mc mtr-tiny iptraf iftop strace kernel-package fakeroot build-essential ncurses-bin ncurses-dev bzip2 screen sudo gawk alien zlib1g-dev uuid uuid-dev libssl-dev parted dh-autoreconf
 
 cd /usr/src
-FILE=`wget -O- -o /dev/null http://kernel.org/ | grep -A 14 '<table id="latest">' | grep '<a href' | grep -v '<img' | cut -d\" -f 2 | cut -c2-`;
-URL="http://kernel.org${FILE}"
+URL=`wget -O- -o /dev/null http://kernel.org/ | grep -A 14 '<table id="latest">' | grep '<a href' | grep -v '<img' | cut -d\" -f 2 | cut -c1-`;
 wget -c $URL
-FILE=`basename $FILE`
+FILE=`basename $URL`
 DIR=`basename $FILE .tar.xz`
 REVISION=`echo $DIR | cut -d- -f2`
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`

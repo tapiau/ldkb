@@ -2,7 +2,7 @@
 
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
-apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config
+apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config libacl1-dev
 
 cd /usr/src
 
@@ -10,5 +10,5 @@ git clone git://git.kernel.org/pub/scm/linux/kernel/git/kdave/btrfs-progs.git
 
 cd btrfs-progs
 make 
-make install
+#make install
 

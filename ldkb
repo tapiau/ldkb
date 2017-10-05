@@ -15,6 +15,8 @@ tar xJf $FILE
 echo "done."
 cd $DIR
 
+touch REPORTING-BUGS
+
 cat /boot/config-`uname -r`>.config
 yes "" | make oldconfig
 make menuconfig

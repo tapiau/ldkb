@@ -13,7 +13,7 @@ REVISION=`echo $DIR | cut -d- -f2`
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
 echo -n "Decompressing..."
-#tar xJf $FILE
+tar xJf $FILE
 echo "done."
 cd $DIR
 

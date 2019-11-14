@@ -2,7 +2,7 @@
 
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
-apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config
+apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config build-essential
 
 cd /usr/src
 

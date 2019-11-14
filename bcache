@@ -2,7 +2,7 @@
 
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
-apt-get install pkg-config libblkid-dev libacl1-dev
+apt-get install pkg-config libblkid-dev libacl1-dev build-essential
 
 cd /usr/src
 git clone https://github.com/g2p/bcache-tools.git

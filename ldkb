@@ -3,9 +3,11 @@
 apt-get -y install mc mtr-tiny iptraf iftop strace kernel-package fakeroot flex bison build-essential ncurses-bin ncurses-dev bzip2 screen sudo gawk alien zlib1g-dev uuid uuid-dev libssl-dev libelf-dev parted dh-autoreconf
 
 cd /usr/src
-URL=`wget -O- -o /dev/null http://kernel.org/ | grep -A 14 '<table id="latest">' | grep '<a href' | grep -v '<img' | cut -d\" -f 2 | cut -c1-`;
+FILE=`wget -O- -o /dev/null http://www.kernel.org/ | grep -A 14 '<table id="latest">' | grep '<a href' | grep -v '<img' | cut -d\" -f 2 | cut -c1-`;
+URL="${FILE}"
+
 wget -c $URL
-FILE=`basename $URL`
+FILE=`basename $FILE`
 DIR=`basename $FILE .tar.xz`
 REVISION=`echo $DIR | cut -d- -f2`
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
@@ -22,4 +24,7 @@ yes "" | make oldconfig
 make menuconfig
 make-kpkg clean
 
-time fakeroot make-kpkg -j${CORES} --revision 00.01.LDKB --initrd kernel_image kernel_headers
+#time make -j${CORES} LOCALVERSION=-ldkb KDEB_PKGVERSION=$(make kernelversion)-1 bindeb-pkg
+time make -j${CORES} LOCALVERSION=-ldkb bindeb-pkg
+
+#time fakeroot make-kpkg -j${CORES} --revision 00.01.LDKB --initrd kernel_image kernel_headers kernel_debug

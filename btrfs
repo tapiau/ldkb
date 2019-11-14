@@ -2,13 +2,21 @@
 
 CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
+<<<<<<< HEAD
 apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config build-essential
+=======
+apt-get install libblkid-dev liblzo2-dev asciidoc e2fslibs-dev pkg-config libacl1-dev
+>>>>>>> 79614fb8f5be2e443e29dda0a4434795e4a80e6c
 
 cd /usr/src
 
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/kdave/btrfs-progs.git
 
 cd btrfs-progs
-make 
+
+./autogen.sh
+./configure --prefix=/usr
+make -j${CORES}
 make install
+
 
